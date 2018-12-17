@@ -1,0 +1,72 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+1. A line of people at an amusement park ride.
+
+The line is composed of members, represented as strings.
+There is a front to the line, as well as a back.
+When someone enters the line, place them at the end.
+People may leave the line whenever they see fit, and those behind them take their place.
+Given the above real-world information, use an array data structure to code the following solution.
+
+a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+Answer:
+let parkMembers = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+
+Answer:
+function addMember(array, name) {
+  array.push(name);
+  return array;
+}
+console.log(addMember(parkMembers, 'Mary'));
+
+c) Find a person in line named "Josh." This function should return the position of 2 in the array, (recall that arrays are 0-based).
+
+Answer:
+function findPerson(array, name) {
+  let ifFound = array.indexOf(name);
+  return ifFound;
+}
+console.log(findPerson(parkMembers, 'Josh'));
+
+d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+
+Answer:
+function findPerson(array, name) {
+  if (array.indexOf(name) == -1) {
+    return "This person is not in line.";
+  } else {
+    return array.indexOf(name);
+  }
+}
+console.log(findPerson(parkMembers, 'Emily'));
+
+e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you code this so Melissa appears before Ava?
+
+Answer:
+function cutInLine(array, index, friend){
+  array.splice(index, 0, friend);
+  return array;
+}
+console.log(cutInLine(parkMembers, 1, "Melissa"));
+
+f) If Patrick wants to leave the line, how would you delete him from the array?
+
+Answer:
+function leaveLine(array, name) {
+  let position = array.indexOf(name);
+  array.splice(position, 1);
+  return array;
+}
+console.log(leaveLine(parkMembers, "Patrick"));
+
+2. Provide another real-world example that you can model using a data structure.
+
+Answer: People waiting in line at the ER (emergency room).
+
+3. How would your data structure allow developers to access and manipulate the data?
+
+Answer: Upon arrival at the ER, patients check in with their name, complaint, and their arrival time is also noted. Developers would be able to access the patient's name and complaint and patients will get seen by the doctor in order of the severity of the complaint. If numerous people get checked in with similar complaint severity levels then they would get seen in order according to their arrival times.
