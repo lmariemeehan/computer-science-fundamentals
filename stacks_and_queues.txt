@@ -13,7 +13,7 @@ Answer: They are both linear structures with flexible sizes that help engineers 
 
 3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
 
-Answer: For UNDO, I would use the stack structure because you care about removing the last move you made. So the last move you made is stacked on top and that is the first one you want to handle (LIFO). I would use a queue data structure for REDO because in order to use the redo command you have to utilize the undo command first. So the undo command would be the first data in and it's the first data that you would want to handle by using the REDO command so the queue is a great structure for this.
+UPDATED Answer: For both UNDO and REDO, I would use the stack structure because you care about retrieving the last move you made. So with UNDO, the last move you made is stacked on top and that is the first one you want to handle (LIFO). And to able to utilize the REDO function, you have had to UNDO a move, which would be the last move you made and the first one you would want to address so it is also a LIFO.
 
 Programming Questions
 You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
