@@ -1,0 +1,206 @@
+Exercises
+>For exercises requiring code, you are free to use the language of your choice.
+
+Give written answers for each question and put them in linked-lists-answers.txt:
+
+1. What are some pros and cons of using linked lists instead of arrays?
+
+Answer: A pro for using a linked list versus an array is that it doesn't have the memory problem that arrays do because every element in the linked list doesn't need to be in contiguous order within the system's memory which means the system doesn't have to look for an empty block of space large enough to find the space needed. A con though, would be that because each element in a linked list can be scattered within the operating system's memory, indexing is not possible so you can't easily access an element that is in the middle of the list like you can with an array. To find an element in a linked list, a journey has to take place from the very beginning of the list and work it's way down in order from node to node until the element is found which makes it slow upon searching. But at least with linked lists it is more efficient for inserting more elements and deleting elements.
+
+2. Come up with a real world example of a linked list.
+
+Answer: A scavenger hunt. On a scavenger hunt you start at the first clue which leads you to the next clue and so on. Other examples could be a train or a conga line.
+
+Programming Questions
+You may program the following questions in any language of your choice (JavaScript, Ruby, etc.).
+
+Before beginning to code, write out a plan explaining how to solve the question.
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+        //Add while loop here
+ SET current.next to node
+       //Increment by one here
+END IF
+END FUNCTION
+
+Answer: You would want to add a loop like a while loop where I commented above to say that "while there is a next node, the current node will equal the next node." Since a linked list has to start from head and works it's way down to the end you have to have a way to hop from node to node until you reach the end which is where the while loop comes in. The last currentnode.next in the linked list will be set to null to say you've reached the end. This is where you could add your next node which is implemented by "SET current.next to node". The pseudocode is also missing where you want to say you are incrementing by one to your linked list (right before the end if) since you are adding to the list so thereby adding to the length of the list.
+
+My implementation:
+
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function(element) {
+  this.element = element;
+  this.next = null;
+  }
+
+  this.head = function(){
+    return head;
+  }
+
+  this.add = function(element){
+    var node = new Node(element);
+    if (head === null) {
+    head = node;
+    } else {
+      var currentNode = head;
+
+      while(currentNode.next) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = node;
+    }
+    length++;
+  }
+}
+
+var train = new LinkedList();
+train.add('first');
+train.add('second');
+train.add('third');
+
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+Answer:
+From the videos and research I've done, I am going to try to remove the duplicates from an unsorted linked list using two loops. From what I can see, the different ways I can do this is by using two loops, or sort the list first then remove, or to use a hash table (hash tables may be the best option but depends on the situation but since I am not familiar with hash tables yet I will try the two loops).
+
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+var Node = function(element) {
+  this.element = element;
+  this.next = null;
+}
+
+this.add = function(element){
+  var node = new Node(element);
+  if (head === null) {
+  head = node;
+  } else {
+    var currentNode = head;
+    while(currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    currentNode.next = node;
+  }
+  length++;
+}
+
+this.removeDuplicates = function() {
+  var dupFinder = head;
+  var currentNode = dupFinder.next;
+  var previousNode;
+  while(dupFinder != null) {
+    while(currentNode !== null) {
+        if (dupFinder.element == currentNode.element && dupFinder.next.element ==     currentNode.element){
+        dupFinder.next = currentNode.next;
+        currentNode = dupFinder.next;
+        length --;
+        } else if (dupFinder.element == currentNode.element){
+          previousNode.next = currentNode.next;
+          currentNode = previousNode.next;
+          length --;
+        } else {
+          previousNode = currentNode;
+          currentNode = currentNode.next;
+          }
+        }
+        dupFinder = dupFinder.next;
+        if(dupFinder === null){
+        } else {
+        currentNode = dupFinder.next
+        }
+    }
+  }
+
+  this.print = function(){
+    var currentNode = head;
+    while(currentNode !== null) {
+    console.log(currentNode.element);
+    currentNode = currentNode.next;
+    }
+  }
+}
+
+var test = new LinkedList();
+test.add('a');
+test.add('c');
+test.add('d');
+test.add('d');
+test.add('a');
+test.removeDuplicates();
+test.print();
+
+3. Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+var Node = function(element) {
+  this.element = element;
+  this.next = null;
+}
+
+this.add = function(element){
+  var node = new Node(element);
+  if (head === null) {
+  head = node;
+  } else {
+    var currentNode = head;
+    while(currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    currentNode.next = node;
+  }
+  length++;
+}
+
+this.reverseList = function(element){
+  var currentNode = head;
+  var previousNode = null;
+  var next = currentNode.next;
+  while(currentNode !== null){
+    currentNode.next = previousNode;
+    previousNode = currentNode;
+    currentNode = next;
+  }
+  head = previousNode;
+}
+
+this.print = function(){
+  var currentNode = head;
+  while(currentNode !== null) {
+  console.log(currentNode.element);
+  currentNode = currentNode.next;
+  }
+}
+}
+
+var test = new LinkedList();
+test.add('a');
+test.add('b');
+test.add('c');
+test.add('d');
+test.reverse();
+test.print();
