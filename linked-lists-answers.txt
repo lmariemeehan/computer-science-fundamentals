@@ -176,16 +176,17 @@ this.add = function(element){
   length++;
 }
 
-this.reverseList = function(element){
-  var currentNode = head;
-  var previousNode = null;
-  var next = currentNode.next;
-  while(currentNode !== null){
-    currentNode.next = previousNode;
-    previousNode = currentNode;
-    currentNode = next;
+this.reverseList = function(){
+  var current = head;
+  var previous = null;
+  var next;
+  while (current){
+    next = current.next;
+    current.next = previous;
+    previous = current;
+    current = next;
   }
-  head = previousNode;
+    head = previous;
 }
 
 this.print = function(){
@@ -202,5 +203,7 @@ test.add('a');
 test.add('b');
 test.add('c');
 test.add('d');
-test.reverse();
+test.print();
+console.log('Now in reverse:');
+test.reverseList();
 test.print();
