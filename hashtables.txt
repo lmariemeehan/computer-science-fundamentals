@@ -1,0 +1,206 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+1. What is a hash table?
+  Answer: A hash table is like a dictionary or a object in that it is a data structure that stores key-value pairs.
+
+2. What is hashing?
+  Answer: Hashing is the process of turning keys of the string data type and turning them into numbers. It will then undergo a final step of ensuring these calculated 'hash codes' does not exceed the size of the array.
+
+3. How does a hash table store data?
+  Answer: It takes a key. The key gets converted to a hash code. Then the hashing function gets the 'true' index (aka key) by modding the hash code. Finally, the value (data) gets stored in the index. In essence it stores data much like an array does.
+
+4. How are hash tables and objects different?
+  Answer: Hash tables utilize a hash function to create it's keys whereas objects do not have such a function. And hash tables are intended to hold similar data types whereas objects it's okay to hold different data types.
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+    a. A list of pets and their unique names.
+        Answer: hash table
+
+    b. The name, age, and the birthday of your best friend.
+        Answer: object
+
+    c. The name and location of every company in a given city.
+        Answer: hash table
+
+    d. All of the books checked out from a library by a particular individual.
+        Answer: hash table
+
+    e. The primary and secondary phone numbers for a contact.
+        Answer: hash table
+
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
+
+  Answer:
+  class CustomerInfo {
+    constructor(customer, sizeLimit) {
+      this.customer = [];
+      this.sizeLimit = 100;
+    }
+
+    hash(phone, max) {
+      var hash = 0;
+      for (let i = 0; i < phone.length; i++) {
+        hash += phone.charCodeAt(i);
+      }
+      return hash % max;
+    };
+
+    add(name, address, phone) {
+      let index = this.hash(phone, this.sizeLimit);
+      if (this.customer[index] === undefined) {
+        this.customer[index] = [[name, address, phone]];
+      } else {
+        let inserted = false;
+        for (let i = 0; i < this.customer[index].length; i++) {
+          if (this.customer[index][i][2] === phone) {
+            this.customer[index][i][1] = [name, address, phone];
+            inserted = true;
+          }
+        }
+        if (inserted === false) {
+          this.customer[index].push([name, address, phone]);
+        }
+      }
+    };
+
+    remove(phone) {
+      let index = this.hash(phone, this.sizeLimit);
+      if (this.customer[index].length === 1 && this.customer[index][0][2] === phone) {
+        delete this.customer[index];
+      } else {
+        for (var i = 0; i < this.customer[index]; i++) {
+          if (this.customer[index][i][2] === phone) {
+            delete this.customer[index][i];
+          }
+        }
+      }
+    };
+
+    lookup(phone) {
+      let index = this.hash(phone, this.sizeLimit);
+      if (this.customer[index] === undefined) {
+        console.log("Customer does not exist. Add new customer?");
+      } else {
+        for (let i = 0; i < this.customer[index].length; i++) {
+          if (this.customer[index][i][2] === phone) {
+            console.log(this.customer[index]);
+          }
+        }
+      }
+    }
+
+    print() {
+      console.log(this.customer);
+    };
+
+  };
+
+  let ht = new CustomerInfo();
+  ht.add('Laura Meehan', '123 7th st w mville wa 98270', '123-456-7890');
+  ht.add('Meyonka Baker', '222 5th st everett wa 98208', '222-456-7777');
+  ht.add('Jacob Meehan', '123 7th st w mville wa 98270', '425-456-7890');
+  ht.add('The Grinch', '999 88th st w mville wa 98270', '425-333-4444');
+  ht.print();
+  ht.lookup('123-456-7890');
+  ht.remove('425-333-4444');
+  ht.print();
+
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+  Answer:
+
+  class StoreInventory {
+  constructor(inventory, inventoryLimit){
+    this.inventory = [];
+    this.inventoryLimit = 10000;
+  }
+
+  hash(string, max){
+  let hash = 0;
+  for (let i =0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+    return hash % max;
+  }
+
+  add(key, value) {
+    let index = this.hash(key, this.inventoryLimit);
+    if (this.inventory[index] === undefined) {
+      this.inventory[index] = [[key, value]];
+    } else {
+      let inserted = false;
+      for (let i = 0; i < this.inventory[index].length; i++) {
+        if (this.inventory[index][i][0] === key) {
+          this.inventory[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        this.inventory[index].push([key, value]);
+      }
+    }
+  }
+
+  lookup(key) {
+    let index = this.hash(key, this.inventoryLimit);
+    if (this.inventory[index] === undefined) {
+      console.log("This item does not exist. Add new item?");
+    } else {
+      for (let i = 0; i < this.inventory[index].length; i++) {
+        if (this.inventory[index][i][0] === key) {
+          console.log("Total " + this.inventory[index][i][0] + "s:" + " " + this.inventory[index][i][1]);
+        }
+      }
+    }
+  }
+
+  print() {
+    console.log(this.inventory);
+  }
+
+}
+
+let items = new StoreInventory();
+items.add('avocado', 30);
+items.add('banana', 40);
+items.add('carrot', 50);
+items.print();
+items.lookup('butter');
+
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+  Answer:
+
+
+     if (this.customer[index] === undefined){
+       console.log('Not a current customer. Add new customer?')
+     } else {
+     console.log(this.customer[index]);
+     }
+   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The end.
