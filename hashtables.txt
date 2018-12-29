@@ -35,7 +35,7 @@ For exercises requiring code, you are free to use the language of your choice.
   class CustomerInfo {
     constructor(customer, sizeLimit) {
       this.customer = [];
-      this.sizeLimit = 100;
+      this.sizeLimit = 10;
     }
 
     hash(phone, max) {
@@ -80,7 +80,7 @@ For exercises requiring code, you are free to use the language of your choice.
     lookup(phone) {
       let index = this.hash(phone, this.sizeLimit);
       if (this.customer[index] === undefined) {
-        console.log("Customer does not exist. Add new customer?");
+        console.log("Customer not found. Add new customer?");
       } else {
         for (let i = 0; i < this.customer[index].length; i++) {
           if (this.customer[index][i][2] === phone) {
@@ -112,7 +112,7 @@ For exercises requiring code, you are free to use the language of your choice.
   class StoreInventory {
   constructor(inventory, inventoryLimit){
     this.inventory = [];
-    this.inventoryLimit = 10000;
+    this.inventoryLimit = 100;
   }
 
   hash(string, max){
@@ -141,10 +141,23 @@ For exercises requiring code, you are free to use the language of your choice.
     }
   }
 
+   remove(key) {
+    let index = this.hash(key, this.inventoryLimit);
+    if (this.inventory[index].length === 1 && this.inventory[index][0][0] === key) {
+      delete this.inventory[index];
+    } else {
+      for (var i = 0; i < this.inventory[index]; i++) {
+        if (this.inventory[index][i][0] === key) {
+          delete this.inventory[index][i];
+        }
+      }
+    }
+  }
+
   lookup(key) {
     let index = this.hash(key, this.inventoryLimit);
     if (this.inventory[index] === undefined) {
-      console.log("This item does not exist. Add new item?");
+      console.log("Item not found. Add new item?");
     } else {
       for (let i = 0; i < this.inventory[index].length; i++) {
         if (this.inventory[index][i][0] === key) {
@@ -164,43 +177,73 @@ let items = new StoreInventory();
 items.add('avocado', 30);
 items.add('banana', 40);
 items.add('carrot', 50);
+items.add('donut', 12);
 items.print();
 items.lookup('butter');
+items.add('avocados', 70);
+items.remove('banana');
+items.print();
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
   Answer:
 
+  class Newspaper{
+  constructor(newspaper, storageLimit){
+  this.newspaper = [];
+  this.storageLimit = 100;
+  }
 
-     if (this.customer[index] === undefined){
-       console.log('Not a current customer. Add new customer?')
-     } else {
-     console.log(this.customer[index]);
-     }
-   };
+hash(string, max){
+let hash = 0;
+for (let i =0; i < string.length; i++) {
+  hash += string.charCodeAt(i);
+}
+  return hash % max;
+}
 
+add(publisher, date, article) {
+  let key = publisher + date;
+  let index = this.hash(key, this.storageLimit);
+  if (this.newspaper[index] === undefined) {
+    this.newspaper[index] = [[key, article]];
+  } else {
+    let inserted = false;
+    for (let i = 0; i < this.newspaper[index].length; i++) {
+      if (this.newspaper[index][i][0] === key) {
+        this.inventory[index][i][1] = article;
+        inserted = true;
+      }
+    }
+    if (inserted === false) {
+      this.newspaper[index].push([key, article]);
+    }
+  }
+}
 
+lookup(publisher, date) {
+  let key = publisher + date;
+  let index = this.hash(key, this.storageLimit);
+  if (this.newspaper[index] === undefined) {
+    console.log("Article not found.");
+  } else {
+    for (let i = 0; i < this.newspaper[index].length; i++) {
+      if (this.newspaper[index][i][0] || this.newspaper[index][i][1] === key) {
+        console.log("Article found: " + this.newspaper[index]);
+      }
+    }
+  }
+}
 
+print() {
+  console.log(this.newspaper);
+}
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The end.
+let stories = new Newspaper();
+stories.add('Herald', '2019', 'E.coli Outbreak! No more salads for you!');
+stories.add('CNN', '2018', 'Stay home and bust out the hot cocoa! A blizzard is coming!');
+stories.add('USA Today', '2020', 'Blockbuster is making a comeback!');
+stories.print();
+stories.lookup('Duck! Watch out for the flying pigs!');
+stories.lookup('E.coli Outbreak! No more salads for you!');
