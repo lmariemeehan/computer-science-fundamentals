@@ -1,0 +1,123 @@
+#Exercises
+>For exercises requiring code, you are free to use the language of your choice.
+
+>Create a file named graphs_and_trees_answers.txt and answer these questions in it.
+
+1. What is a binary tree and what makes it unique to other trees?
+
+  Answer: A binary tree is a tree data structure of which each node has at most two children (called left child and right child.). Other trees could contain more nodes. Also, binary trees will store the key that it is associated with but for example, a trie tree data structure does not do the same.
+
+2. What is a heuristic?
+
+  Answer: It's essentially a technique for solving problems that doesn't necessarily worry about finding the best or most accurate solution but instead it's objective is just to find a a good enough one quickly. (Like an educated guess).
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+  Answer: In real life you could consider utilizing heuristics in games of chess/connect 4. Or searching for your misplaced keys. I feel like 'Google Suggest' uses heuristics in a way too but I could be wrong.
+
+4. What is the difference between a depth-first search and a breadth-first search?
+
+  Answer: The order in which it searches for a desired element. Depth will travel all the way down a single branch and will backtrack up if the element is not found then moves on to the next branch over. Breadth is like reading a book in that it starts at the top and works it's way down the nodes in rows moving from left to right.
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+  Answer: It's a graph where the nodes are connected without a proper start or end (meaning it's undirected), does not form a loop and a depth-first search results in a dead end (meaning it's a-cyclic), and with it being unweighted means that there has been no assigned cost of travel between the nodes.
+
+6. What kind of graph is a binary search tree?
+
+  Answer: Directed, a-cyclic, and I don't think that they usually are weighted but from some sites that I found it looks like it can be weighted (aka weight-balanced binary search trees) graph. Would love some clarification on this point or any resources that you like on the subject.
+
+  #Programming Questions
+  >For the following questions, describe in words how you could solve the problem and then do so. Use the depiction of the Binary Search Tree to refer to the examples.
+
+          8
+         /  \
+        3   10
+       / \     \
+      1   6     14
+         / \    /
+        4   7  13
+
+  1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+  Answer:
+
+  class Node {
+    constructor (data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+    }
+  }
+
+  class BinarySTree {
+    constructor () {
+    this.root = null;
+    }
+
+    add(data) {
+        const node = this.root;
+        if (node === null) {
+          this.root = new Node(data);
+          return;
+        } else {
+          const searchTree = function(node) {
+            if (node < node.data) {
+              if (node.left === null) {
+                node.left = new Node(data);
+                return;
+              } else if (node.left !==null) {
+                return searchTree(node.left);
+              }
+              } else if (data > node.data) {
+                if (node.right === null) {
+                node.right = new Node (data);
+                return;
+              } else if (node.right !== null) {
+                return searchTree(node.right);
+              }
+            } else{
+              return null;
+            }
+          };
+          return searchTree(node);
+        }
+    }
+
+    find(data) {
+      let current = this.root;
+      while (current.data !== data) {
+          if(data < current.data) {
+          current = current.left;
+          } else {
+            current = current.right;
+          }
+          if (current === null) {
+          console.log('Does not exist.');
+          }
+    }
+    console.log(current);
+    }
+
+  }
+
+  const test = new BinarySTree();
+
+  test.add(8);
+  test.add(3);
+  test.add(10);
+  test.add(1);
+  test.add(6);
+  test.add(14);
+  test.add(4);
+  test.add(7);
+  test.add(13);
+  test.find(10);
+  test.find(23);
+
+
+  Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+  2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+  Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
