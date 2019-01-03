@@ -1,0 +1,80 @@
+Exercises
+
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+* Making coffee;
+
+  FUNCTION makeCoffee (mug, groundCoffee, coffeeMaker, filter, water, cream, sugar) {
+    IF coffeeMaker water level equals null
+      THEN add water;
+      ELSE IF water level is less than half;
+        INCREMENT by one cup for each cup of coffee needed
+      ELSE do nothing;
+    END IF
+
+    Add filter to coffeeMaker;
+    Add groundCoffee to coffeeMaker;
+    SET mug in coffeeMaker;
+    SET coffeemaker to on;
+      RETURN coffee;
+
+    IF cream is required
+      THEN add two tablespoons
+      ELSE don't add cream;
+    END IF
+
+    IF sugar is required
+      THEN add two sugars;
+      ELSE don't add sugars;
+    END IF
+
+    RETURN coffee;
+
+  END FUNCTION
+  }
+
+* Washing dishes;
+
+FUNCTION washDishes (sink, water, soap, dirtyDishes) {
+  SET sink to full;
+  ADD water to sink;
+  ADD soap to sink;
+
+  FOR each dirtyDishes in sink
+    scrub dirtyDishes until spotless;
+    rinse dirtyDishes until clean;
+    DECREMENT dirtyDishes;
+  ENDFOR
+
+END FUNCTION
+}
+
+* A choice of your own. Vacuum room:
+
+FUNCTION vacuum(vacuum, room) {
+  IF vacuum canister equals full
+    THEN empty canister;
+  END IF
+
+  SET vacuum to on;
+
+  WHILE spots on floor to clean > zero
+    Vacuum square footage;
+  END WHILE
+}
+END FUNCTION
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+  * Ford - In 1913 Ford made the first mass production of automobiles (specifically the Ford Model T). According to wikipedia, "By 1927, Ford had produced over 15,000,000 Model T automobiles." Vehicles nowadays come in all shapes and sizes but they all solve the same problem - transportation.
+
+  * Starbucks - Coffee. There are sooo many ways to make a cup of coffee and Starbucks has created many. However, Starbucks stands out not just because of it's coffee options but because of it's ambience and many, many locations worldwide.
+
+  * Microsoft - Excel, Outlook, Word, PowerPoint, OneDrive. A lot of great products, all of which solve some kind of a problem on a personal or professional level. PowerPoint is widely used for better presentations, Excel for financial calculations, Outlook for email management, and Word for drafting documents.
+
+3.Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+1. Does it solve the problem? If it does great, if not then it's inefficient.
+2. Accuracy - If the end result is way off the mark then I would catalog that as inefficient.
+3. Time/speed - If an algorithm takes forever and a day when it really could be done in half the time then I would consider it inefficient.

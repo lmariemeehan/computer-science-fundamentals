@@ -43,10 +43,10 @@
   Answer:
 
   class Node {
-    constructor (data, left = null, right = null) {
+    constructor (data, left, right) {
     this.data = data;
-    this.left = left;
-    this.right = right;
+    this.left = null;
+    this.right = null;
     }
   }
 
@@ -101,7 +101,7 @@
 
   }
 
-  const test = new BinarySTree();
+  let test = new BinarySTree();
 
   test.add(8);
   test.add(3);
@@ -121,3 +121,44 @@
   2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
   Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+  * Answer below (passed in tree made from above) *
+
+    function findDistance(tree, n1, n2) {
+      let lCA= findLCA(tree.root, n1, n2);
+      let totalDistance = pathLength(lCA, n1) + pathL(lCA, n2);
+      console.log(totalDistance);
+      }
+
+    function findLCA(current, n1, n2){
+      if (n1 < current.data && n2 < current.data) {
+          current = current.left;
+          return findLCA(current, n1, n2);
+          } else if (n1 > current.data && n2 > current.data){
+            current = current.right;
+            return findLCA(current, n1, n2);
+          } else {
+          console.log('One or both nodes does not exist.');
+          }
+          return current;
+    }
+
+    function pathLength(current, node){
+      let i = 0;
+        while (current.data != node) {
+          if (node < current.data ){
+          i++;
+          current = current.left;
+        } else if (node > current.data) {
+          i++;
+          current = current.right;
+        }
+        }
+          return i;
+        }
+
+
+
+    findDistance(test, 4, 10);
+    findDistance(test, 9, 10);
+    findDistance(test, 1, 14);
