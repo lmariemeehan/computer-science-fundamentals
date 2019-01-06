@@ -1,0 +1,126 @@
+class Node {
+  constructor (value, left, right) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+  }
+}
+
+class BinarySTree {
+  constructor () {
+  this.root = null;
+  }
+
+  getRoot(){
+    return this.root;
+  }
+
+  add(value) {
+      const node = this.root;
+      if (node === null) {
+        this.root = new Node(value);
+        return;
+      } else {
+        const searchTree = function(node) {
+          if (value < node.value) {
+            if (node.left === null) {
+              node.left = new Node(value);
+              return;
+            } else if (node.left !==null) {
+              return searchTree(node.left);
+            }
+            } else if (value > node.value) {
+              if (node.right === null) {
+              node.right = new Node (value);
+              return;
+            } else if (node.right !== null) {
+              return searchTree(node.right);
+            }
+          } else{
+            return null;
+          }
+        };
+        return searchTree(node);
+      }
+  }
+
+  find(value) {
+    let current = this.root;
+    while (current) {
+        if(value === current.value) {
+          return true;
+        } else if (value < current.value) {
+          current = current.left;
+        } else {
+          current = current.right;
+        }
+    }
+    return false;
+  }
+
+  findLCA(root, n1, n2){
+    let ancestor = this.root;
+
+      while (ancestor){
+        if (n1 === ancestor.value || n2 === ancestor.value) {
+          return ancestor;
+        }
+
+        if ((n1 < ancestor.value && n2 > ancestor.value) ||
+          (n1 > ancestor.value && n2 < ancestor.value))
+        {
+          return ancestor;
+        }
+
+        if (n1 < ancestor.value && n2 < ancestor.value) {
+          ancestor = ancestor.left;
+        } else {
+            ancestor = ancestor.right;
+        }
+    }
+    return ancestor;
+  }
+
+  pathLength(root, node){
+    let current = this.root;
+    let i = 0;
+        while (current && current.value != node) {
+          if (node < current.value ){
+            current = current.left;
+          } else {
+            current = current.right;
+          }
+          i++;
+        }
+        return i;
+    }
+
+  findDistance(root, n1, n2) {
+    let LCA = this.findLCA(root, n1, n2);
+
+    let distance = this.pathLength(LCA, n1) + this.pathLength(LCA, n2);
+    return distance;
+  }
+}
+
+let test = new BinarySTree();
+
+test.add(8);
+test.add(3);
+test.add(10);
+test.add(1);
+test.add(6);
+test.add(14);
+test.add(4);
+test.add(7);
+test.add(13);
+//console.log('Is 10 here?: ', test.find(10));
+//console.log('Is 23 here?: ', test.find(23));
+console.log('What is the lowest common ancestor: ', test.findLCA(8, 10, 13));
+//console.log('Path Length of root to node:', test.pathLength(8, 1));
+console.log('Distance between 1 and 10 is:', test.findDistance(8, 1, 10));//3
+console.log('Distance between 6 and 14 is:', test.findDistance(8, 6, 14));//4
+console.log('Distance between 4 and 13 is:', test.findDistance(8, 4, 13));//6
+console.log('Distance between 3 and 10 is:', test.findDistance(8, 3, 10));//2
+console.log('Distance between 4 and 7 is:', test.findDistance(8, 4, 7));//2
+console.log('Distance between 1 and 7 is:', test.findDistance(8, 1, 7)); //3
