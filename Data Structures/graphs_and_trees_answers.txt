@@ -119,19 +119,17 @@
 
   Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
 
-  * Answer below (passed in tree made from above) *
-
-  class Node {
-constructor (value, left, right) {
-this.value = value;
-this.left = null;
-this.right = null;
-}
+class Node {
+  constructor (value, left, right) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
 }
 
 class BinarySTree {
-constructor () {
-this.root = null;
+  constructor () {
+    this.root = null;
 }
 
 getRoot(){

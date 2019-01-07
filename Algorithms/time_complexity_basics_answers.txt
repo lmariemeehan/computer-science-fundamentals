@@ -3,19 +3,30 @@ Create a file named time_complexity_basics_answers.txt and place your answers wi
 
 1. What is time complexity and what is its relation to algorithms?
 
-Answer: Time complexity is a function that estimates how long it will take for a program/algorithm to execute. Figuring out the time complexity is a good way to depict the efficiency of an algorithm.
+  Answer: Time complexity is a function that estimates how long it will take for a program/algorithm to execute. Figuring out the time complexity is a good way to depict the efficiency of an algorithm.
 
 2. What is runtime?
 
-Answer: Very similar idea to time complexity except that it is talking about the physical (seconds/minutes) of time.
+  Answer: Very similar idea to time complexity except that it is talking about the physical (seconds/minutes) of time.
 
 3. How is the runtime of an algorithm calculated?
 
-Answer: By entering different input sizes and watching the physical length of time. You also have to consider the fact that one computer to the next can be different in terms of single versus multi processor, read/write speed to memory, and bit sizes.
+  Answer: By entering different input sizes and watching the physical length of time. You also have to consider the fact that one computer to the next can be different in terms of single versus multi processor, read/write speed to memory, and bit sizes.
 
 4. Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
 
+  Answer:
+    Constant Growth Rate - O(1)
+    Logarithmic Growth Rate - O(log n)
+    Linear Growth Rate - O(n)
+    Log-Linear Growth Rate - O(n log n)
+    Quadratic Growth Rate - O(n^2)
+  ** Polynomial or Algebraic Growth Rate - O(n^c)
+    Exponential Growth Rate - O(2^n)
+
 5. Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+  Answer: Exponential Growth Rate real life example - Human embryogenesis. We all start off as zygotes (single cell). Next, we go through a cleavage state where cells divide. The single cells become 2 cells, which then becomes 4 cells, then 8 cells, then 16 cells, then 32 cells, etc. This exponential growth rate takes place within the first few days after fertilization.
 
 6. Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
 
@@ -28,6 +39,8 @@ FUNCTION linearSearch(array, target)
  RETURN false
 END FUNCTION
 
+Answer: O(n)
+
 7. Determine the time complexity of the following snippet of code.
 
 If you get stuck, read through the graphical representation section again.
@@ -39,6 +52,8 @@ FUNCTION foo(array)
    END FOR
  END FOR
 END FUNCTION
+
+Answer: O(n^2)
 
 8. Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
 
@@ -54,4 +69,8 @@ FUNCTION fibonacci(number)
  END IF
 END FUNCTION
 
+Answer: O(2^n)
+
 9. Out of the code snippets you just saw, which is the most time efficient?
+
+Answer: Linear = O(n) is the most time efficient.
