@@ -1,0 +1,56 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+Provide all code and written answers in a file named recursion_answers.txt:
+
+1. Define and compare recursion and iteration.
+
+Answer: Recursion is when a statement inside a function calls itself over and over again until (hopefully) a good base case was set to stop the recursion at an appropriate time. Iteration is when a loop repeatedly runs until the controlling condition becomes false (that is, if it was set up correctly to begin with). The difference is that recursion is always applied to a function while iteration is applied to a set of instructions.
+
+2. Name five algorithms that are commonly implemented by recursion.
+
+Answer: Recursive binary search, printing out a linked list, reversing a string, greatest common divisor, and as noted the fibonacci sequence.
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+Answer:  You will want to avoid using recursion when dealing with large amounts of data because it can result in a stack overflow. And recursion's time efficiency is not as good as iteration. Example: the Fibonacci sequence in recursion is O(2^n) while in iteration it's time complexity is O(n). A good time to use recursion is for searching/sorting in binary search trees and algorithms like merge sort. It's more readable to use recursion in these instances.
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+Answer:
+-Factorial- both start off the same with if number is less than zero result in error. Recursion has a slightly different second base case in that if it's zero or one  to return to 1. After that the set up differs in that the for loop has to care about when the numbers are down to 2.
+-Maximum- recursion has two base cases for which one says while the iteration version does not have this as part of the code. After that, they are similar in that both needed to loop through an array and compare it to the first item.
+-Fibonacci- recursion has base cases that are not part of the makeup of the iteration version. And the iteration version has a line of, "FOR i = 3 to number" which is not necessary in the recursion.
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+Answer:
+
+function countItems(arr) {
+    if (!("0" in arr)) {
+        return 0;
+    }
+    return countItems(arr.slice(0, -1)) + 1;
+}
+
+console.log(countItems([1,2,3,4,5,6,7]));//correct answer = 7
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+Answer:
+
+function isPalindrome(string) {
+    var strLen = string.length;
+    if (strLen === 0 || strLen === 1) {
+        return true;
+    }
+    if (string[0] === string[strLen - 1]) {
+        return isPalindrome( string.slice(1, strLen - 1) );
+    }
+    return false;
+};
+console.log(isPalindrome('racecar'));
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+
+Answer: That's cute. Someone has a sense of humor. When you click on the "Did you mean: recursion" link it loops you back to the same page, recursively, ha! ;)
