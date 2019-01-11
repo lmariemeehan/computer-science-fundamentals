@@ -59,6 +59,9 @@ console.log(wordSearch(allTheWords, "shenanigan")); //returns 7
 2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
 
 Answer:
+
+let fishes = ["silver-orange", "white-spotted", "orange", "yellow", "white-black", "orange-spotted"]
+
 function goFish (troubling, goldfish) {
   var result = null, value;
   for(let i =0; i < troubling.length; i++) {
