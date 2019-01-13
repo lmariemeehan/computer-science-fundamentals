@@ -1,0 +1,57 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+Create a file named algos_sorting_answers.txt and answer these questions in it:
+
+1. Write pseudocode for bubble sort.
+Answer:
+FUNCTION bubbleSort(collection)
+    SET swapped to false
+
+    FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+      IF collection[i] > collection[i + 1] THEN
+        SET TEMP to collection[i]
+        SET collection[i] to collection[i + 1]
+        SET collection[i + 1] to TEMP
+        SET swapped to true
+      END IF
+    END FOR
+  UNTIL swapped is FALSE
+
+  RETURN collection
+END FUNCTION
+
+
+2. Write pseudocode for quicksort.
+Answer:
+FUNCTION quickSort(collection)
+  IF collection.length <= 1 THEN
+    RETURN collection
+  END IF
+
+  SET PIVOT POINT to POP off LAST INDEX of collection
+  SET LEFT to empty array
+  SET RIGHT to empty array
+  SET NEWARRAY to empty array
+
+  FOR i = FIRST INDEX of collection to LAST INDEX of collection
+      IF collection[i] > PIVOT POINT THEN
+        PUSH collection[i] to RIGHT
+      ELSE
+        PUSH collection[i] to LEFT
+      END IF
+  END FOR
+
+  RETURN NEWARRAY CONCATENATING(quickSort(left), pivot, quicksort(right))
+END FUNCTION
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+Answer:
+Merge sort and Quick sort's average time complexity = O(n log n). The for loops make it linear and because we are halving the data set makes it logarithmic.
+Insertion sort time complexity average performance = O(n^2) which is quadratic growth making it slower than merge and quick sort log-linear growth rate.
+Bubble sort's time complexity average performance = O(n^2) which is quadratic growth making it slower than merge and quick sort log-linear growth rate.
+
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+Answer: Bucket sort takes an array and arranges the elements into buckets using their indexes as a value. Once all the elements are placed in these buckets then they get sorted from there (typically by insertion sort) then merged back into a sorted list. Bucket is a distribution sort but typically uses comparison sort once the elements are in the buckets as I explained above. Downside is that more auxiliary memory is required for this. Upside is that it's time complexity could be faster at O(n+k). Ideal input for a bucket sort is for when the elements can be uniformly/fairly evenly distributed.  
