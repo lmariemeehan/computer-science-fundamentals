@@ -1,0 +1,70 @@
+#Exercises
+Create a new repository on GitHub to hold your assignments for the Databases module. Create a new branch for Checkpoint 1. Submit your answers.
+
+1. What data types do each of these values represent?
+
+  -"A Clockwork Orange"    Answer: string
+  -42                      Answer: integer
+  -09/02/1945              Answer: date
+  -98.7                    Answer: float
+  -$15.99                  Answer: money
+
+
+2. Explain when a database would be used. Explain when a text file would be used.
+Answer: You'd use a database when you have data that you'd like to store, update, and retrieve from that persist beyond the end of a program and can handle multiple applications accessing it at one time. A text file could be used when you want to create/store/update data like above but do not need it beyond the end of the program.
+
+
+3. Describe one difference between SQL and other programming languages.
+Answer: SQL is a declarative versus a procedural language. When using SQL you care more about the 'what' we're looking for rather than the 'how' we want to retrieve it.
+
+
+4. In your own words, explain how the pieces of a database system fit together at a high level.
+Answer: Within a database system, related data is often organized into tables rather than lists. You could then access the database using an interface such as the command line.
+
+
+5. Explain the meaning of table, row, column, and value.
+Answer: Tables are comprised of rows, columns, and values and is a collection of related data as a whole. Each row is called a *record* which represents an individual object or entity. Columns define what the value represents.
+
+6. List three data types that can be used in a table.
+Answer: string, integer, date
+
+7. Given this payments table, provide an English description of the following queries and include their results:
+
+     SELECT date, amount
+     FROM payments;
+     Answer: I am looking for all of the dates and amounts from the payments table.
+
+     SELECT amount
+     FROM payments
+     WHERE amount > 500;
+     Answer: I am looking for all of the amounts in the payments table where the amount is greater than 500.
+
+     SELECT *
+     FROM payments
+     WHERE payee = 'Mega Foods';
+     Answer: I am looking for everything in the payments table that is about 'Mega Foods'.
+
+8. Given this users table, write SQL queries using the following criteria and include the output:
+
+  -The email and sign-up date for the user named DeAndre Data.
+  Answer:
+  SELECT email,
+  FROM users
+  WHERE name = 'DeAndre Data';
+
+  -The user ID for the user with email 'aleesia.algorithm@uw.edu'.
+  Answer:
+  SELECT userid
+  FROM users
+  WHERE email = 'aleesia.algorithm@uw.edu';
+
+  -All the columns for the user ID equal to 4.
+  Answer:
+  SELECT *
+  FROM users
+  WHERE userid = 4;
+
+Additional practice:
+
+SQLCourse
+HackerRank
