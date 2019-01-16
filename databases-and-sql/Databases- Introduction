@@ -48,7 +48,7 @@ Answer: string, integer, date
 
   -The email and sign-up date for the user named DeAndre Data.
   Answer:
-  SELECT email,
+  SELECT email, signup
   FROM users
   WHERE name = 'DeAndre Data';
 
