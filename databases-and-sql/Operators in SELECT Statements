@@ -93,10 +93,10 @@ Answer:
   >=               Example: I could use this if I wanted to pull all homes that are *greater than or equal to* this price.
   <>               Example: I could use this if I wanted to pull all homes that are *not equal* to a townhouse.
   !=               Example: I could use this if I wanted to pull all homes that are *not equal* to a multi-family dwelling.
+  LIKE             Example: I could use this if I wanted to pull all homes that say something *like* contemporary in the keywords field.
 
   Bonus Fun: Real world examples with logical operators:
   NOT              Example: I could use this if I wanted to pull all homes that are *not* short sales.
-  LIKE             Example: I could use this if I wanted to pull all homes that say something *like* contemporary in the keywords field.
   OR               Example: I could use this if I wanted to pull all homes that say price reduced *or* fixer-uppers in a status column.
   AND              Example: I could use this if I wanted to pull all homes that have 4 bedrooms *and* 2.5 baths.
   BETWEEN          Example: I could use this if I wanted to pull all homes that are *between* 500000 and 600000 dollars.
