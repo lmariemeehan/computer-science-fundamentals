@@ -1,0 +1,114 @@
+Checkpoint 5: Operators in SELECT Statements
+#Exercises
+Answer the following questions and submit the responses.
+
+1. Write out a generic SELECT statement.
+
+Answer:
+  SELECT column-name
+  FROM table
+  WHERE column-name LIKE '%';
+
+2. Create a fun way to remember the order of operations in a SELECT statement, such as a mnemonic.
+
+Answer:
+  S = Sally
+  F = Finds
+  W = Wine,
+  L = Lovely
+
+3. Given this dogs table, write queries to select the following pieces of data:
+
+> Intake teams typically guess the breed of shelter dogs, so the breed column may have multiple words (for example, "Labrador Collie mix").
+
+  *Display the name, gender, and age of all dogs that are part Labrador.
+  Answer:
+    SELECT name, gender, age
+    FROM dogs
+    WHERE breed LIKE 'labrador%';
+
+  *Display the ids of all dogs that are under 1 year old.
+  Answer:
+    SELECT id
+    FROM dogs
+    WHERE age < 1;
+
+  *Display the name and age of all dogs that are female and over 35lbs.
+  Answer:
+    SELECT name, age
+    FROM dogs
+    WHERE gender = 'F'
+    AND weight > 35;
+
+  *Display all of the information about all dogs that are not Shepherd mixes.
+  Answer:
+    SELECT *
+    FROM dogs
+    WHERE breed NOT LIKE '%shepherd%';
+
+  *Display the id, age, weight, and breed of all dogs that are either over 60lbs or Great Danes.
+  Answer:
+    SELECT id, age, weight, breed
+    FROM dogs
+    WHERE weight > 60
+    OR breed = 'great dane';
+
+4. Given this cats table, what records are returned from these queries?
+
+  *SELECT name, adoption_date FROM cats;
+  Answer: All 5 rows show up but only shows each cat's name and adoption date or null in the adoption_date column if the cat has not been adopted yet.
+
+  *SELECT name, age FROM cats;
+  Answer: All 5 rows show up but only shows each cat's name and ages.
+
+
+5. From the cats table, write queries to select the following pieces of data.
+
+  *Display all the information about all of the available cats.
+  Answer:
+  SELECT *
+  FROM cats
+  WHERE adoption_date is null;
+
+  *Display the name and sex of all cats who are 7 years old.
+  Answer:
+  SELECT name, gender
+  FROM cats
+  WHERE age = 7;
+
+  *Find all of the names of the cats, so you don’t choose duplicate names for new cats.
+  Answer:
+  SELECT name
+  FROM cats;
+
+
+6. List each comparison operator and explain when you would use it. Include a real world example for each.
+
+  * If you can’t list these from memory, do these flashcards until you can!
+  Answer: All my examples would deal with a database filled with homes available on the market..
+  <                Example: I could use this if I wanted to pull all homes that are *less than* a certain square footage.
+  >                Example: I could use this if I wanted to pull all homes that have *more than* 3 bedrooms.
+  =                Example: I could use this if I wanted to pull all homes that are located *equal* to this city.
+  <=               Example: I could use this if I wanted to pull all homes that are *less than or equal to* this price.
+  >=               Example: I could use this if I wanted to pull all homes that are *greater than or equal to* this price.
+  <>               Example: I could use this if I wanted to pull all homes that are *not equal* to a townhouse.
+  !=               Example: I could use this if I wanted to pull all homes that are *not equal* to a multi-family dwelling.
+
+  Bonus Fun: Real world examples with logical operators:
+  NOT              Example: I could use this if I wanted to pull all homes that are *not* short sales.
+  LIKE             Example: I could use this if I wanted to pull all homes that say something *like* contemporary in the keywords field.
+  OR               Example: I could use this if I wanted to pull all homes that say price reduced *or* fixer-uppers in a status column.
+  AND              Example: I could use this if I wanted to pull all homes that have 4 bedrooms *and* 2.5 baths.
+  BETWEEN          Example: I could use this if I wanted to pull all homes that are *between* 500000 and 600000 dollars.
+
+
+7. From the cats table, what data is returned from these queries?
+
+  *SELECT name FROM cats WHERE gender = ‘F’;
+  Answer: Seashell and Nala
+
+  *SELECT name FROM cats WHERE age <> 3;
+  Answer: Mushi, Seashell, Victoire, Nala
+
+  *SELECT ID FROM cats WHERE name != ‘Mushi’ AND gender = ‘M’;
+  Answer: 3, 4
