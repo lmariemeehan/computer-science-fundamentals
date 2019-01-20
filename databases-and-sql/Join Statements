@@ -1,0 +1,134 @@
+#Exercises
+>Submit your answers to the following questions.
+
+NOTE: Real-world examples must be your own and not based on the text or previous assignments.
+
+1. How do you find related data held in two separate data tables?
+
+  Answer: You run a JOIN clause to see what data two or more tables have in common.
+
+2. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
+
+  Answer:
+  Example:
+  Laura's Friends       Jake's Friends
+  1 Steve               1 Steve
+  2 Tasha               2 Tasha
+  3 Heather             3 Josh
+  4 Meyonka             4 Nick
+
+  * INNER JOIN will only show an output of shared common values between the tables in question. Using the example above, inner join's output will show Steve and Tasha since
+  these are the shared common values between the two tables.
+
+  * LEFT OUTER JOIN will show an output of not only the shared common values between the tables being compared but will also reflect any unique unmatched values that belong only to the left table. And for all the rows on the left table that have a unique value, the right column will just be null in conjunction alongside of it. Using the example above, left outer join will show all 4 of Laura's friends and in Jake's column it will only show Steve and Tasha. Josh and Nick would be null.
+
+  * RIGHT OUTER JOIN is the same concept as the left outer join except that it will show all the unique unmatched values for the right table instead. Using the example above, all 4 of Jake's friends will show and only Steve and Tasha will show up in Laura's column. Heather and Meyonka would be null.
+
+
+3. Define primary key and foreign key. Give a real-world example for each.
+
+  Answer:
+  Every row in a table has a primary key. That way when you need to select a row in order to make an update or delete you have a way to identify which row you intend to select. A table will often list the primary keys of another table in order to link the two together but in this case it is called a *foreign key* since it is foreign to this table. Example: When shopping in a one-stop shop store products could be found by their model or sku number which could act as a primary key. And every product belongs to a certain department (which would have it's own table) so in order to link these two tables together you may throw the department's primary keys into the products table.
+
+4. Define aliasing.
+
+  Answer: Aliasing is just abbreviating or condensing down table names in order to simplify things.
+
+5. Change this query so that you are using aliasing:
+
+SELECT professor.name, compensation.salary,
+  compensation.vacation_days FROM professor JOIN
+  compensation ON professor.id =
+  compensation.professor_id;
+
+  Answer:
+  SELECT p.name, c.salary, c.vacation_days
+    FROM professor AS p
+    JOIN compensation AS c
+    ON p.id = c.professor_id;
+
+6. Why would you use a NATURAL JOIN? Give a real-world example.
+
+  Answer: It's a quick and easy way to join tables because it only pulls the shared columns between the tables you wish to compare without you having to look up and type, each shared column name out by hand. Example: At my husband's work, he'd have a list of work orders that would need to be done for the day and his assistant would also have a list of work orders to be done for the day. A natural join would work well to be able to see which orders they have in common so that they don't attempt to work on the same orders.
+
+7. Using this Employee schema and data, write queries to find the following information:
+  * List all employees and all shifts.
+
+  Answer:
+  SELECT *
+    FROM employees FULL OUTER JOIN shifts ON employees.id= shifts.id;
+
+
+8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
+
+  * Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.*
+
+  Answer: Hagrid is fostering Munchkin and Dursley is fostering Marmaduke. The rest of the volunteers shows as null within the dogs name column.
+
+  SELECT volunteers.first_name, volunteers.last_name, dogs.name
+    FROM volunteers
+    LEFT OUTER JOIN dogs
+    ON volunteers.foster_dog_id = dogs.id;
+
+  * The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.*
+
+  Answer: Mushi has been adopted by Arabella on 12/31/2018 and Victoire has been adopted by Argus on 1/05/2019. Azul is NOT on this list because he was adopted 45 days ago.
+
+  SELECT cats.name, adopters.first_name, adopters.last_name, cat_adoptions.date
+    FROM cat_adoptions
+    JOIN cats ON cat_adoptions.cat_id = cats.id
+    JOIN adopters ON cat_adoptions.adopter_id = adopters.id
+    WHERE cat_adoptions.date >= CURRENT_DATE - INTERVAL '30 DAYS';
+
+  * Create a list of adopters who have not yet chosen a dog to adopt.*
+
+  Answer: Hermione Granger and Arabella Figg have not yet chosen a dog.
+
+  SELECT *
+    FROM adopters
+    LEFT OUTER JOIN dog_adoptions ON adopters.id = dog_adoptions.adopter_id
+    WHERE dog_adoptions.adopter_id IS NULL;
+
+  * Lists of all cats and all dogs who have not been adopted.*
+
+  Answer: Munchkin, Boujee, Lassie, Marley, and Marmaduke are all the dogs who have not been adopted yet. Nala and Seashell are the cats who have not been adopted.
+
+  SELECT *
+    FROM dogs
+    LEFT OUTER JOIN dog_adoptions ON dogs.id = dog_adoptions.dog_id
+	   WHERE dog_adoptions.adopter_id IS NULL;
+
+  SELECT *
+    FROM cats
+    LEFT OUTER JOIN cat_adoptions ON cats.id = cat_adoptions.cat_id
+  	WHERE cat_adoptions.adopter_id IS NULL;
+
+  * The name of the person who adopted Rosco.*
+
+  Answer: Argus Filch adopted Rosco.
+
+  SELECT adopters.first_name, adopters.last_name
+    FROM adopters
+    JOIN dog_adoptions ON adopters.id = dog_adoptions.adopter_id;
+
+
+9. Using this Library schema and data, write queries applying the following scenarios and include the results:
+
+  * To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".*
+
+  Answer: Terry Boot and Cedric Diggory have a hold on "Advanced Potion-Making"
+
+  SELECT patrons.name, holds.rank, books.title
+    FROM patrons
+    LEFT OUTER JOIN holds ON patrons.id = holds.patron_id
+    LEFT OUTER JOIN books ON holds.isbn = books.isbn
+    WHERE books.title = 'Advanced Potion-Making'
+    ORDER by holds.rank;
+
+  * List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
+
+  SELECT patrons.name, books.title
+    FROM transactions
+    JOIN books ON (books.isbn = transactions.isbn
+    AND transactions.checked_in_date IS NULL)
+    RIGHT OUTER JOIN patrons ON transactions.patron_id = patrons.id;
